@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ログイン</title>
 
   <style>
@@ -15,6 +16,7 @@
     .login-box {
 
       max-width: 360px;
+
       margin: 80px auto;
 
       background: white;
@@ -46,6 +48,8 @@
       border: 1px solid #ccc;
 
       border-radius: 6px;
+
+      box-sizing: border-box;
     }
 
     button {
@@ -76,6 +80,52 @@
       margin-top: 12px;
     }
 
+    .password-wrapper {
+
+      position: relative;
+
+      width: 90%;
+
+      margin: 10px auto;
+    }
+
+    .password-wrapper input {
+
+      width: 100%;
+
+      padding-right: 48px;
+    }
+
+    .toggle-password {
+
+      position: absolute;
+
+      right: 10px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: none;
+
+      background: none;
+
+      cursor: pointer;
+
+      color: #666;
+
+      padding: 0;
+
+      width: auto;
+
+      height: auto;
+    }
+
+    .toggle-password:hover {
+      color: #222;
+      background: none;
+    }
+
   </style>
 </head>
 
@@ -87,6 +137,8 @@
 
     <form onsubmit="checkLogin(); return false;">
 
+      <!-- ログインID -->
+
       <input
         id="loginId"
         name="username"
@@ -95,13 +147,49 @@
         placeholder="ログインID"
       >
 
-      <input
-        id="passwordInput"
-        name="password"
-        type="password"
-        autocomplete="current-password"
-        placeholder="Password"
-      >
+      <!-- パスワード -->
+
+      <div class="password-wrapper">
+
+        <input
+          id="passwordInput"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Password"
+        >
+
+        <button
+          type="button"
+          class="toggle-password"
+          onclick="togglePassword()"
+          aria-label="パスワード表示切替"
+        >
+
+          <svg
+            id="eyeIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+
+            <circle cx="12" cy="12" r="3"></circle>
+
+          </svg>
+
+        </button>
+
+      </div>
+
+      <!-- ログインボタン -->
 
       <button type="submit">
         ログイン
@@ -115,7 +203,7 @@
 
   <script>
 
-    // 有効ID
+    // 有効ID一覧
     const validIds = [
 
       "P-Y69XFH",
@@ -130,6 +218,26 @@
       "H-78RD2C"
 
     ];
+
+    // パスワード表示切替
+
+    function togglePassword() {
+
+      const passwordInput =
+        document.getElementById("passwordInput");
+
+      if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+
+      } else {
+
+        passwordInput.type = "password";
+
+      }
+    }
+
+    // ログイン処理
 
     function checkLogin() {
 
@@ -146,6 +254,7 @@
         document.getElementById("message");
 
       // ID確認
+
       if (!validIds.includes(loginId)) {
 
         message.textContent =
@@ -155,6 +264,7 @@
       }
 
       // パスワード①
+
       if (password === "alpha123") {
 
         window.location.href =
@@ -163,6 +273,7 @@
       }
 
       // パスワード②
+
       else if (password === "beta456") {
 
         window.location.href =
@@ -170,12 +281,12 @@
 
       }
 
-      // PWエラー
+      // エラー
+
       else {
 
         message.textContent =
           "パスワードが違います。";
-
       }
     }
 
