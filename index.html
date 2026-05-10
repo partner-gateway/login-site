@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ログイン</title>
+
+  <style>
+
+    body {
+      background: #f5f5f5;
+      font-family: sans-serif;
+    }
+
+    .login-box {
+
+      max-width: 360px;
+      margin: 80px auto;
+
+      background: white;
+
+      padding: 24px;
+
+      border-radius: 12px;
+
+      box-shadow:
+        0 4px 12px rgba(0,0,0,0.1);
+
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+
+      width: 90%;
+
+      padding: 10px;
+
+      margin: 10px 0;
+
+      font-size: 16px;
+
+      border: 1px solid #ccc;
+
+      border-radius: 6px;
+    }
+
+    button {
+
+      padding: 10px 24px;
+
+      border: none;
+
+      border-radius: 6px;
+
+      background: #4285f4;
+
+      color: white;
+
+      font-size: 16px;
+
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #3367d6;
+    }
+
+    #message {
+
+      color: red;
+
+      margin-top: 12px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="login-box">
+
+    <h2>ログイン</h2>
+
+    <form onsubmit="checkLogin(); return false;">
+
+      <input
+        id="loginId"
+        name="username"
+        type="text"
+        autocomplete="username"
+        placeholder="ログインID"
+      >
+
+      <input
+        id="passwordInput"
+        name="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Password"
+      >
+
+      <button type="submit">
+        ログイン
+      </button>
+
+    </form>
+
+    <p id="message"></p>
+
+  </div>
+
+  <script>
+
+    // 有効ID
+    const validIds = [
+
+      "P-Y69XFH",
+      "P-6DNJNR",
+      "P-JFXZ4A",
+      "P-3Q2U58",
+      "P-R6XWEZ",
+      "P-6YHG4M",
+      "P-PFHSNU",
+      "P-F2UHKY",
+      "P-2PRAH4",
+      "H-78RD2C"
+
+    ];
+
+    function checkLogin() {
+
+      const loginId =
+        document.getElementById("loginId")
+        .value
+        .trim();
+
+      const password =
+        document.getElementById("passwordInput")
+        .value;
+
+      const message =
+        document.getElementById("message");
+
+      // ID確認
+      if (!validIds.includes(loginId)) {
+
+        message.textContent =
+          "ログインIDが正しくありません。";
+
+        return;
+      }
+
+      // パスワード①
+      if (password === "alpha123") {
+
+        window.location.href =
+          "https://sites.google.com/cross.or.jp/cnp367g8sv9dhvn87su74q8y6nrb6x/";
+
+      }
+
+      // パスワード②
+      else if (password === "beta456") {
+
+        window.location.href =
+          "https://sites.google.com/view/あなたのサイト/pageB";
+
+      }
+
+      // PWエラー
+      else {
+
+        message.textContent =
+          "パスワードが違います。";
+
+      }
+    }
+
+  </script>
+
+</body>
+</html>
